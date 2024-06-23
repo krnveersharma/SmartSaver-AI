@@ -7,7 +7,7 @@ export function middleware(request:Request){
     const token=cookies().get('token');//change to _vercel_jwt on deployment
     if (!token) {
         console.log("Token not found in cookies");
-        return NextResponse.redirect(new URL('/login', request.url));
+        return NextResponse.redirect(new URL('/', request.url));
     }
     try {
         const payload= jose.jwtVerify(token.value,new TextEncoder().encode(secret));
@@ -17,10 +17,10 @@ export function middleware(request:Request){
                 return NextResponse.next();
        }
        else {
-        return NextResponse.redirect(new URL('/login', request.url))        }
+        return NextResponse.redirect(new URL('/', request.url))        }
     } catch (error) {
         console.log(error)
-        return NextResponse.redirect(new URL('/login', request.url))    }
+        return NextResponse.redirect(new URL('/', request.url))    }
 
 }
 export const config = {

@@ -1,5 +1,6 @@
 'use client'
 import {
+  Box,
     Button,
   Card,
   CardBody,
@@ -8,13 +9,18 @@ import {
   FormLabel,
   Heading,
   Input,
+  Text,
 } from "@chakra-ui/react";
-import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { redirect } from "react-router-dom";
 
 
 const Register = () => {
+  const router = useRouter()
+
     const [data,setData]=useState({
         username:'',
         email:'',
@@ -42,6 +48,18 @@ const Register = () => {
         console.log(Error);
       }
     }
+    useEffect(()=>{
+      const getting=async()=>{
+        const response = await fetch("/api/getUser", {
+          method: "GET",
+        });
+        console.log(response)
+        if (response.ok) {
+          router.push('/pages/home')
+        }
+    }
+    getting();
+    },[])
   return (
     <form onSubmit={handleSubmit}>
       <Card align='center'>
@@ -94,6 +112,9 @@ const Register = () => {
               }))
             }} />
           </FormControl>
+          <Box width={'inherit'}>
+              <span><Text fontSize={'sm'}>Already have an account?</Text></span>
+        <span><Link href="/"><Text align={'left'} fontSize={'sm'}>Login</Text></Link></span></Box>
         </CardBody>
         <Button type="submit" colorScheme={'green'}>Submit</Button>
       </Card>
