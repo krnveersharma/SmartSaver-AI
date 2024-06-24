@@ -24,5 +24,5 @@ export function middleware(request:Request){
 
 }
 export const config = {
-    matcher: ['/Pages/:path*']
+    matcher: ['/pages/:path*']
 };

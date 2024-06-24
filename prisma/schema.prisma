@@ -29,6 +29,7 @@ model Signup{
   password String 
   Income Int
   expenditure Expenditure[]
+  blog Blog[]
 }
 
 model Expenditure{
@@ -36,6 +37,15 @@ model Expenditure{
   expense Int
   name String  @default("")
   date DateTime
+  userId String
+  signup Signup @relation(fields:[userId],references:[id])
+}
+
+model Blog{
+  id String @id @default(cuid())
+  title String @unique @db.VarChar(480)
+  Category String @unique @db.VarChar(20)
+  Description String
   userId String
   signup Signup @relation(fields:[userId],references:[id])
 }

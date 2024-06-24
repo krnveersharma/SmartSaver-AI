@@ -62,8 +62,8 @@ export default function Simple() {
           <HStack spacing={8} alignItems={'center'}>
             <Box>Logo</Box>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                <Link href="/Pages/home" key={'home'}>Home</Link>
-                <Link href="/Pages/home" key={'home'}>Your Blogs</Link>
+                <Link href="/pages/home" key={'home'}>Home</Link>
+                <Link href="/pages/yourblogs" key={'home'}>Your Blogs</Link>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -89,8 +89,8 @@ export default function Simple() {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-                <Link href="/Pages/home" key={'home'}>Home</Link>
-                <Link href="/Pages/home" key={'home'}>Your Blogs</Link>
+                <Link href="/pages/home" key={'home'}>Home</Link>
+                <Link href="/pages/yourblogs" key={'home'}>Your Blogs</Link>
             </Stack>
           </Box>
         ) : null}

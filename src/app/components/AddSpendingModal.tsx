@@ -46,7 +46,7 @@ export default function AddSpendingModal() {
           <ModalOverlay />
           <ModalContent>
             <form onSubmit={handleSubmit}>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>Add Spending</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
                 <FormControl>
