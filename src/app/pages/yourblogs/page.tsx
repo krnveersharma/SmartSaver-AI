@@ -37,9 +37,9 @@ const YourBlogs = () => {
             <Tbody>
                 {data.map((item)=>{
                     return(<Tr>
-                        <Td>{item.title}</Td>
-                        <Td>{item.Category}</Td>
-                        <Td>{item.Description}</Td>
+                        <Td>{item.title.substring(0,24)}...</Td>
+                        <Td>{item.Category.substring(0,24)}...</Td>
+                        <Td>{item.Description.substring(0,24)}...</Td>
                         <Td><Button colorScheme={'red'} onClick={async(e)=>{
                             const response=await fetch('/api/userblogs',{
                                 method:"DELETE",

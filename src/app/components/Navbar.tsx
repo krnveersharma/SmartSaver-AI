@@ -90,7 +90,8 @@ export default function Simple() {
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
                 <Link href="/pages/home" key={'home'}>Home</Link>
-                <Link href="/pages/yourblogs" key={'home'}>Your Blogs</Link>
+                <Link href="/pages/yourblogs" key={'yourblogs'}>Your Blogs</Link>
+                <Link href="/pages/allblogs" key={'allblogs'}>All Blogs</Link>
             </Stack>
           </Box>
         ) : null}

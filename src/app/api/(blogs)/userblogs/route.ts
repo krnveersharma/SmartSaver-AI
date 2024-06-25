@@ -20,14 +20,17 @@ export const GET=async(request:Request)=>{
 export const DELETE=async(request:Request)=>{
     try {
         const id=await request.json();
-     
+        const token=cookies().get('token');
+        const claims = jose.decodeJwt(token.value)
+        if(claims.id!=id){
+            return NextResponse.json({message:"You can't delete another person blogs",status:400});
+        }
         const userblogs =await prisma.blog.delete({
             where:{
                 id:id
             },
         });
-        const token=cookies().get('token');
-        const claims = jose.decodeJwt(token.value)
+        
         const newUserBlogs =await prisma.blog.findMany({
             where:{
                 userId:claims.id
