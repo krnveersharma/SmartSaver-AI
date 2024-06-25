@@ -64,6 +64,7 @@ export default function Simple() {
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
                 <Link href="/pages/home" key={'home'}>Home</Link>
                 <Link href="/pages/yourblogs" key={'home'}>Your Blogs</Link>
+                <Link href="/pages/allblogs" key={'allblogs'}>All Blogs</Link>
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
