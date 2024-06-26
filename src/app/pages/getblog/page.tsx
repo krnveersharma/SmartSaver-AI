@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Box, Card, CardBody, CardHeader, Text } from '@chakra-ui/react';
 
@@ -29,6 +29,7 @@ const GetBlog = () => {
       getBlogs();
     }, []);
   return (
+      
     <Card p={'4'}>
       <CardHeader fontWeight={'bold'}>{data.title}</CardHeader>
       <CardBody>

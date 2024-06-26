@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import {
   Box,
   Button,
@@ -13,54 +13,54 @@ import {
   useStatStyles,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const EditBlog = () => {
-    const router=useRouter();
-    const searchParams=useSearchParams();
-    const id=searchParams.get("id")
-    const [data, setData] = useState({
-        id: "",
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const [data, setData] = useState({
+    id: "",
+    title: "",
+    Category: "",
+    Description: "",
+    userId: "",
+  });
+  useEffect(() => {
+    const getBlog = async () => {
+      const response = await fetch("/api/editblog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(id),
+      });
+      const dt = await response.json();
+      console.log(dt.data[0]);
+      setData(dt.data[0]);
+    };
+    getBlog();
+  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await fetch("/api/editblog", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    setData({
+      id: "",
       title: "",
       Category: "",
       Description: "",
       userId: "",
     });
-    useEffect(()=>{
-        const getBlog=async()=>{
-            const response=await fetch("/api/editblog", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(id),
-              });
-              const dt=await response.json();
-              console.log(dt.data[0])
-              setData(dt.data[0]);
-        }
-        getBlog();
-    },[])
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      await fetch("/api/editblog", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      setData({
-        id: "",
-      title: "",
-      Category: "",
-      Description: "",
-      userId: "",
-      });
-      router.push('/pages/yourblogs')
-    };
-    return (
+    router.push("/pages/yourblogs");
+  };
+  return (
       <Card>
         <CardHeader>
           <Heading>Add Your Blog!!!</Heading>
@@ -118,8 +118,7 @@ const EditBlog = () => {
           </form>
         </CardBody>
       </Card>
-    );
-  };
+  );
+};
 
-
-export default EditBlog
+export default EditBlog;
