@@ -10,6 +10,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -50,13 +51,14 @@ const YourBlogs = () => {
           <Tbody>
             {data.map((item) => {
               return (
-                
-                  <Tr>
+                <Tr onClick={()=>{
+                  router.push(`/pages/getblog?id=${item.id}` )
+                }} cursor={'pointer'}>
+                 
                     <Td>{item.title.substring(0, 24)}...</Td>
                     <Td>{item.Category.substring(0, 24)}...</Td>
                     <Td>{item.Description.substring(0, 24)}...</Td>
-                  </Tr>
-                
+                </Tr>
               );
             })}
           </Tbody>

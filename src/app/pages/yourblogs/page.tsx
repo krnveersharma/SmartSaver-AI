@@ -40,6 +40,9 @@ const YourBlogs = () => {
                         <Td>{item.title.substring(0,24)}...</Td>
                         <Td>{item.Category.substring(0,24)}...</Td>
                         <Td>{item.Description.substring(0,24)}...</Td>
+                        <Td><Button colorScheme={'blue'} onClick={()=>{
+                  router.push(`/pages/editblog?id=${item.id}` )
+                }} >Edit</Button></Td>
                         <Td><Button colorScheme={'red'} onClick={async(e)=>{
                             const response=await fetch('/api/userblogs',{
                                 method:"DELETE",

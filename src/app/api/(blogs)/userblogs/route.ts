@@ -21,7 +21,7 @@ export const DELETE=async(request:Request)=>{
     try {
         const id=await request.json();
         const token=cookies().get('token');
-        const claims = jose.decodeJwt(token.value)
+        const claims = jose.decodeJwt(token.value);
         if(claims.id!=id){
             return NextResponse.json({message:"You can't delete another person blogs",status:400});
         }

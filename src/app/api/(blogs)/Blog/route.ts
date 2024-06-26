@@ -14,7 +14,6 @@ export const POST=async(request:Request)=>{
             Description:description,
             userId:claims.id
         }
-        console.log(data)
         try {
             const newblog=await prisma.blog.create(
                 {
