@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Box,
   Button,
@@ -13,13 +13,12 @@ import {
   useStatStyles,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, {  useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const EditBlog = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const id = new URLSearchParams("id");
   const [data, setData] = useState({
     id: "",
     title: "",
@@ -118,6 +117,7 @@ const EditBlog = () => {
           </form>
         </CardBody>
       </Card>
+    
   );
 };
 
