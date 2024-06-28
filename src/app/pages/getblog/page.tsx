@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Box, Card, CardBody, CardHeader, Text } from "@chakra-ui/react";
 
 const GetBlog = () => {
-  const id = new URLSearchParams("id");
+  
   const [data, setData] = useState({
     id: "",
     title: "",
@@ -13,6 +13,8 @@ const GetBlog = () => {
     userId: "",
   });
   useEffect(() => {
+    let params= new URLSearchParams(document.location.search);
+  const id=params.get("id");
     const getBlogs = async () => {
       const response = await fetch("/api/getblogs", {
         method: "POST",
@@ -22,7 +24,6 @@ const GetBlog = () => {
         body: JSON.stringify(id),
       });
       const allBlogs = await response.json();
-      console.log(allBlogs);
       setData(allBlogs.data[0]);
     };
     getBlogs();

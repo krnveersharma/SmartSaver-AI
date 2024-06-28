@@ -18,7 +18,7 @@ import { useSearchParams } from "next/navigation";
 
 const EditBlog = () => {
   const router = useRouter();
-  const id = new URLSearchParams("id");
+  
   const [data, setData] = useState({
     id: "",
     title: "",
@@ -27,6 +27,8 @@ const EditBlog = () => {
     userId: "",
   });
   useEffect(() => {
+    let params= new URLSearchParams(document.location.search);
+  const id=params.get("id");
     const getBlog = async () => {
       const response = await fetch("/api/editblog", {
         method: "POST",
@@ -36,7 +38,6 @@ const EditBlog = () => {
         body: JSON.stringify(id),
       });
       const dt = await response.json();
-      console.log(dt.data[0]);
       setData(dt.data[0]);
     };
     getBlog();

@@ -20,7 +20,7 @@ export const POST=async(request:Request)=>{
             data:data
             
         },(err)=>{
-            console.log(err)
+            return NextResponse.json({meesage:err,status:400})
         })
         return NextResponse.json({message:newSpend,status:200});
     } catch (error) {

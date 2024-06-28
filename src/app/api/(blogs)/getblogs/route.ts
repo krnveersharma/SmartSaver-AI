@@ -4,6 +4,7 @@ import prisma from "../../../../../lib/prisma";
 export const POST = async (request: Request) => {
   try {
     const id = await request.json();
+    console.log("id:", id)
     const blogData = await prisma.blog.findMany({
       where: {
         id: id,

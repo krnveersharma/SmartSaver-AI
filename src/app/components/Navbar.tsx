@@ -93,6 +93,7 @@ export default function Simple() {
                 <Link href="/pages/home" key={'home'}>Home</Link>
                 <Link href="/pages/yourblogs" key={'yourblogs'}>Your Blogs</Link>
                 <Link href="/pages/allblogs" key={'allblogs'}>All Blogs</Link>
+                <Link href="/pages/recommendations">Recommendations</Link>
             </Stack>
           </Box>
         ) : null}
