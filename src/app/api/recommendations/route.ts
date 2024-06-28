@@ -4,7 +4,7 @@ import Groq from "groq-sdk";
 import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const groq = new Groq({ apiKey: "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"});
 
 const formatExpenditureData = (data) => {
   let formattedData = `User ID: ${data.userId}\nExpenditures:\n`;
