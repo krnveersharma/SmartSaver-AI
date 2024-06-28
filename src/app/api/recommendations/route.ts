@@ -4,29 +4,35 @@ import Groq from "groq-sdk";
 import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 
-const groq = new Groq({ apiKey: "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"});
-
-const formatExpenditureData = (data) => {
-  let formattedData = `User ID: ${data.userId}\nExpenditures:\n`;
-  data.map((item) => {
-    formattedData += `- ${item.name}: $${item.expense}\n`;
-  });
-  return formattedData;
-};
-
-export async function getGroqChatCompletion(prompt) {
-  return groq.chat.completions.create({
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-    model: "llama3-8b-8192",
-  });
-}
+const groq = new Groq({
+  apiKey: "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",
+});
 
 export const GET = async (request: Request) => {
+  const formatExpenditureData = (data) => {
+    let formattedData = `User ID: ${data.userId}\nExpenditures:\n`;
+    data.map((item) => {
+      formattedData += `- ${item.name}: $${item.expense}\n`;
+    });
+    return formattedData;
+  };
+
+
+
+  async function getGroqChatCompletion(prompt) {
+    return groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: prompt + "All price is in INR.Give answer in points",
+        },
+      ],
+      model: "llama3-8b-8192",
+    });
+  }
+
+
+  
   try {
     const token = cookies().get("token");
     const claims = jose.decodeJwt(token.value);
