@@ -49,9 +49,9 @@ export const GET = async (request: Request) => {
       });
       try {
         const formattedData = formatExpenditureData(userData);
-        const prompt = `Analyze the following expenditure data and provide money-saving recommendations:\n\n${formattedData}`;
+        const prompt = `Analyze the data and Provide money-saving recommendations. You can give examples too:\n\n${formattedData}`;
         const chatCompletion = await getGroqChatCompletion(
-          prompt + "All price is in INR.Give answer in points"
+          prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}]. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"
         );
         return NextResponse.json({
           message: chatCompletion.choices[0]?.message?.content,

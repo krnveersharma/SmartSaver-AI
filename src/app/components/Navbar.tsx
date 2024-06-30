@@ -1,5 +1,4 @@
-'use client'
-
+"use client";
 import {
   Box,
   Flex,
@@ -16,90 +15,146 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import Link from 'next/link'
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const Links = ['Home', 'Team']
+const Links = ["Home", "Team"];
 
 const NavLink = (props: Props) => {
-  const { children } = props
+  const { children } = props;
 
   return (
     <Box
       as="a"
       px={2}
       py={1}
-      rounded={'md'}
+      rounded={"md"}
       _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('gray.200', 'gray.700'),
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
       }}
-      href={'#'}>
+      href={"#"}
+    >
       {children}
     </Box>
-  )
-}
+  );
+};
 
 export default function Simple() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isPresent, setIsPresent] = useState(false);
+  useEffect(() => {
+    const userData = async () => {
+      try {
+        const response = await fetch("/api/getUser", {
+          method: "GET",
+        });
+        if (response.ok) {
+          setIsPresent(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    userData();
+  }, []);
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/Logout", {
+        method: "GET",
+      });
+      if (response.ok) {
+        console.log("Logout successful");
 
+        window.location.reload();
+      } else {
+        console.error("Logout failed:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
-            size={'md'}
+            size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={'center'}>
-            <Box>Logo</Box>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                <Link href="/pages/home" key={'home'}>Home</Link>
-                <Link href="/pages/yourblogs" key={'home'}>Your Blogs</Link>
-                <Link href="/pages/allblogs" key={'allblogs'}>All Blogs</Link>
-                <Link href="/pages/recommendations">Recommendations</Link>
+          <HStack spacing={8} alignItems={"center"}>
+            <Box bgColor={"#C41E3A"} p="1" border={"1px"} borderRadius={"full"}>
+              <Text color="black" fontStyle={"italic"}>
+                Money Manager
+              </Text>
+            </Box>
+            <HStack
+              as={"nav"}
+              spacing={4}
+              display={{ base: "none", md: "flex" }}
+            >
+              <Link href="/pages/home" key={"home"}>
+                Home
+              </Link>
+              <Link href="/pages/yourblogs" key={"home"}>
+                Your Blogs
+              </Link>
+              <Link href="/pages/allblogs" key={"allblogs"}>
+                All Blogs
+              </Link>
+              <Link href="/pages/recommendations">Recommendations</Link>
             </HStack>
           </HStack>
-          <Flex alignItems={'center'}>
+          <Flex alignItems={"center"}>
             <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                minW={0}>
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
-              </MenuButton>
-              
+              {isPresent && (
+                <Box>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      handleLogout();
+                    }}
+                  >
+                    Logout
+                  </MenuButton>
+                </Box>
+              )}
             </Menu>
           </Flex>
         </Flex>
 
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
-                <Link href="/pages/home" key={'home'}>Home</Link>
-                <Link href="/pages/yourblogs" key={'yourblogs'}>Your Blogs</Link>
-                <Link href="/pages/allblogs" key={'allblogs'}>All Blogs</Link>
-                <Link href="/pages/recommendations">Recommendations</Link>
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
+              <Link href="/pages/home" key={"home"}>
+                Home
+              </Link>
+              <Link href="/pages/yourblogs" key={"yourblogs"}>
+                Your Blogs
+              </Link>
+              <Link href="/pages/allblogs" key={"allblogs"}>
+                All Blogs
+              </Link>
+              <Link href="/pages/recommendations">Recommendations</Link>
             </Stack>
           </Box>
         ) : null}
       </Box>
-
     </>
-  )
+  );
 }

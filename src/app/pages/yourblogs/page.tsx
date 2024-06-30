@@ -52,6 +52,7 @@ const YourBlogs = () => {
                                   body:JSON.stringify(item.id)
                             })
                             const newData=await response.json()
+                            console.log("newData",newData);
                             setData(newData.data)
                         }}
                         
