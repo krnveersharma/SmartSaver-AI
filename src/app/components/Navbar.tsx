@@ -91,12 +91,32 @@ export default function Simple() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={"center"}>
-            <Box bgColor={"#C41E3A"} p="1" border={"1px"} borderRadius={"full"}>
-              <Text color="black" fontStyle={"italic"}>
-                Money Manager
-              </Text>
-            </Box>
+          <HStack  spacing={8} alignItems={"center"}>
+            <svg width="100" height="64"  xmlns="http://www.w3.org/2000/svg">
+              <rect rx="100%"  width="100%" height="100%" fill="white" />
+
+              <text x="10" y="35" font-family="Arial" font-size="20" fill="black">
+                $
+              </text>
+
+              <text
+                x="25"
+                y="25"
+                font-family="Arial"
+                font-size="10"
+                fill="black"
+              >
+                <tspan font-size="15" font-weight="italic">
+                  M
+                </tspan>
+                oney
+                <tspan fontStyle={'italic'} x="25" dy="1.2em" font-size="15">
+                  M
+                </tspan>
+                <tspan fontStyle={'italic'}>anager</tspan>
+              </text>
+            </svg>
+
             <HStack
               as={"nav"}
               spacing={4}

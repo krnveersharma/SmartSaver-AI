@@ -3,7 +3,6 @@ import { Box, Button, Card, CardBody, CardHeader, FormControl, FormLabel, Headin
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { redirect } from "react-router-dom";
 import { useRouter } from 'next/navigation'
 
 const Login = () => {
@@ -24,8 +23,9 @@ const Login = () => {
                   body:JSON.stringify(data)
             })
             if(response.ok){
-              router.push('/pages/home')
-              
+              console.log("here")
+              router.refresh();
+              router.push('/pages/home')  
             }
             else{
               console.log("Error");
@@ -42,7 +42,7 @@ const Login = () => {
         });
         console.log(response)
         if (response.ok) {
-          router.push('/pages/home')
+          router.push('/pages/home');
         }
     }
     getting();

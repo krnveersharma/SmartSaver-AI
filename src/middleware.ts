@@ -4,7 +4,7 @@ import * as jose from 'jose'
 const secret="Hello guys"
 
 export function middleware(request:Request){
-    const token=cookies().get('token');//change to _vercel_jwt on deployment
+    const token=cookies().get('token')
     if (!token) {
         console.log("Token not found in cookies");
         return NextResponse.redirect(new URL('/', request.url));

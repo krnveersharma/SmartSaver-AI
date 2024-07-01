@@ -8,9 +8,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { InfiniteMovingCards } from "../../components/InfiniteMovingCards";
 
 const Recommendations = () => {
-  const [data, setData] = useState([{ loading: "Loading" }]);
+  const [data, setData] = useState<{ any: any }[]>([]);
+
+
   useEffect(() => {
     const getRecommendations = async () => {
       const response = await fetch("/api/recommendations", {
@@ -32,6 +35,8 @@ const Recommendations = () => {
   }, [data]);
 
   return (
+    <Box>
+      <InfiniteMovingCards items={data}/>
     <Card>
       <CardHeader>
         <Heading>Recommendations</Heading>
@@ -49,7 +54,9 @@ const Recommendations = () => {
         ))}
       </CardBody>
     </Card>
+    </Box>
   );
 };
 
 export default Recommendations;
+
