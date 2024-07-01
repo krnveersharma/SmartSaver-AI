@@ -36,24 +36,9 @@ const Recommendations = () => {
 
   return (
     <Box>
+      <Text fontWeight={'bold'}>Recommendations</Text>
       <InfiniteMovingCards items={data}/>
-    <Card>
-      <CardHeader>
-        <Heading>Recommendations</Heading>
-      </CardHeader>
-      <CardBody>
-        {data.map((item, index) => (
-          <Box key={index} mb={4}>
-            {Object.entries(item).map(([key, value]) => (
-              <Box key={key}>
-                <Text fontWeight="bold">{key}:</Text>
-                <Text>{value}</Text>
-              </Box>
-            ))}
-          </Box>
-        ))}
-      </CardBody>
-    </Card>
+    
     </Box>
   );
 };
