@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { InfiniteMovingCards } from "../../components/InfiniteMovingCards";
+import Head from "next/head";
 
 const Recommendations = () => {
   const [data, setData] = useState<{ any: any }[]>([]);
@@ -35,11 +36,11 @@ const Recommendations = () => {
   }, [data]);
 
   return (
-    <Box>
-      <Text fontWeight={'bold'}>Recommendations</Text>
-      <InfiniteMovingCards items={data}/>
+    <Card>
+      <CardHeader><Heading>Recommendations</Heading></CardHeader>
+      <CardBody><InfiniteMovingCards items={data}/></CardBody>
     
-    </Box>
+    </Card>
   );
 };
 
