@@ -24,6 +24,7 @@ const Recommendations = () => {
       try {
         const cleanString = data.message.trim();
         const array = JSON.parse(cleanString);
+        console.log("yourdata",array)
         setData(array);
       } catch (error) {
         console.log(error);

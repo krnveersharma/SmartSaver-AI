@@ -37,6 +37,28 @@ export const GET = async (request: Request) => {
     const token = cookies().get("token");
     const claims = jose.decodeJwt(token.value);
     try {
+      let findRecommend=await prisma.recommendation.findMany({
+        where:{
+          userId:claims.id
+        }
+      })
+      const todayDate=new Date();
+     const diff=(todayDate.getTime()-findRecommend[0].created_at.getTime())/60000;
+     if(diff>=4320){ //Delete after 3 days
+        await prisma.recommendation.delete({
+          where:{
+            id:findRecommend[0].id
+          }
+        });
+        findRecommend=[]
+     }
+      if(findRecommend.length!=0){
+        return NextResponse.json({message:findRecommend[0].data,status:200})
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    try {
       const sixDaysAgo = new Date();
       sixDaysAgo.setDate(sixDaysAgo.getDate() - 6);
       const userData = await prisma.expenditure.findMany({
@@ -53,10 +75,26 @@ export const GET = async (request: Request) => {
         const chatCompletion = await getGroqChatCompletion(
           prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}]. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"
         );
-        return NextResponse.json({
-          message: chatCompletion.choices[0]?.message?.content,
-          status: 200,
-        });
+        try {
+          const data={
+            data: chatCompletion.choices[0]?.message?.content,
+            userId:claims.id,
+            created_at:new Date()
+          }
+          await prisma.recommendation.create({
+            data:data
+          });
+          const findRecommend=await prisma.recommendation.findMany({
+            where:{
+              userId:claims.id
+            }
+          })
+          return NextResponse.json({message:findRecommend[0].data,status:200})
+        } catch (error) {
+          return NextResponse.json({message:error,status:400})
+        }
+        
+       
       } catch (error) {
         NextResponse.json({
           error: "Error generating recommendations",

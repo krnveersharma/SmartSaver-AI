@@ -30,6 +30,7 @@ model Signup{
   Income Int
   expenditure Expenditure[]
   blog Blog[]
+  recommendation Recommendation?
 }
 
 model Expenditure{
@@ -47,5 +48,13 @@ model Blog{
   Category String @unique @db.VarChar(20)
   Description String
   userId String
+  signup Signup @relation(fields:[userId],references:[id])
+}
+
+model Recommendation{
+  id String @id @default(cuid())
+  data String
+  created_at DateTime
+  userId String @unique
   signup Signup @relation(fields:[userId],references:[id])
 }
