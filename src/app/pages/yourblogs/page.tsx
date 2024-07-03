@@ -2,6 +2,7 @@
 import { Box, Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import Simple from '../../components/Navbar'
 
 const YourBlogs = () => {
     const router = useRouter()
@@ -25,6 +26,7 @@ const YourBlogs = () => {
     },[])
   return (
     <Box>
+        <Simple/>
     <TableContainer>
         <Table variant={'simple'}>
             <Thead>

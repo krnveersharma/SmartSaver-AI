@@ -5,6 +5,7 @@ import AddSpendingModal from "../../components/AddSpendingModal";
 import AllTime from "../../components/AllTime";
 import Daily from "../../components/Daily";
 import Monthly from "../../components/Monthly";
+import Simple from "../../components/Navbar";
 
 type Expenditure = {
   id: string;
@@ -55,8 +56,8 @@ const Home = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
-        const val: UserData = await response.json();
-        setData(val[0]);
+        const val = await response.json();
+        setData(val.message[0]);
       } catch (error) {
         console.log(error);
       }
@@ -66,6 +67,7 @@ const Home = () => {
 
   return (
     <Box>
+      <Simple/>
       <Box>
       </Box>
       <Box p={4}>

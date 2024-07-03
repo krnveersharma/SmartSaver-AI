@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import Simple from "../../components/Navbar";
 
 const YourBlogs = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const YourBlogs = () => {
   }, []);
   return (
     <Box>
+      <Simple/>
       <TableContainer>
         <Table variant={"simple"}>
           <Thead>

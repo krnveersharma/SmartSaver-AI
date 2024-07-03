@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
+import Simple from "./components/Navbar";
 
 const Login = () => {
   const router = useRouter()
@@ -12,29 +13,29 @@ const Login = () => {
         username:'',
         password:''
     })
-    const handleSubmit=async(e)=>{
-        e.preventDefault();
-        try {
-            const response=await fetch('/api/Login',{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                  },
-                  body:JSON.stringify(data)
-            })
-            if(response.ok){
-              console.log("here")
-              router.refresh();
-              router.push('/pages/home')  
-            }
-            else{
-              console.log("Error");
-            }
-        } catch (error) {
-            console.log(error);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      router.prefetch
+      try {
+        const response = await fetch('/api/Login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+        const parsedData=await response.json();
+        console.log("parsed",parsedData)
+        if (parsedData.status===200) {
+          window.location.assign('/pages/home')
+        } else {
+          console.log('Login failed:', parsedData.status);
         }
-       
-    }
+      } catch (error) {
+        console.log('Error during login:', error);
+      }
+    };
     useEffect(()=>{
       const getting=async()=>{
         const response = await fetch("/api/getUser", {
@@ -49,6 +50,7 @@ const Login = () => {
     },[])
   return (
     <form onSubmit={handleSubmit}>
+      <Simple />
       <Card align="center">
         <CardHeader>
           <Heading>Login</Heading>

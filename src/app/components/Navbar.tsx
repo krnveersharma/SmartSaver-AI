@@ -49,14 +49,23 @@ const NavLink = (props: Props) => {
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isPresent, setIsPresent] = useState(false);
+  useEffect(()=>{
+    console.log(isPresent);
+  },[isPresent])
   useEffect(() => {
     const userData = async () => {
       try {
         const response = await fetch("/api/getUser", {
           method: "GET",
         });
-        if (response.ok) {
+        const parsedData=await response.json();
+        console.log("parsed",parsedData.status)
+        if (parsedData.status===200) {
+          console.log("here")
           setIsPresent(true);
+        }
+        else{
+          setIsPresent(false)
         }
       } catch (error) {
         console.log(error);

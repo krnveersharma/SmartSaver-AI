@@ -137,8 +137,8 @@ const Monthly = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
-        const val: UserData = await response.json();
-        setData(val[0]);
+        const val = await response.json();
+        setData(val.message[0]);
       } catch (error) {
         console.log(error);
       }

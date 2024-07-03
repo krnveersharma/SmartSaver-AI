@@ -15,10 +15,11 @@ import {
 import { useRouter } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Simple from "../../components/Navbar";
 
 const EditBlog = () => {
   const router = useRouter();
-  
+
   const [data, setData] = useState({
     id: "",
     title: "",
@@ -27,8 +28,8 @@ const EditBlog = () => {
     userId: "",
   });
   useEffect(() => {
-    let params= new URLSearchParams(document.location.search);
-  const id=params.get("id");
+    let params = new URLSearchParams(document.location.search);
+    const id = params.get("id");
     const getBlog = async () => {
       const response = await fetch("/api/editblog", {
         method: "POST",
@@ -61,6 +62,8 @@ const EditBlog = () => {
     router.push("/pages/yourblogs");
   };
   return (
+    <>
+      <Simple />
       <Card>
         <CardHeader>
           <Heading>Add Your Blog!!!</Heading>
@@ -118,7 +121,7 @@ const EditBlog = () => {
           </form>
         </CardBody>
       </Card>
-    
+    </>
   );
 };
 

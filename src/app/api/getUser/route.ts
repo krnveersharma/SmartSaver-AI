@@ -6,6 +6,11 @@ import prisma from "../../../../lib/prisma";
 export const GET = async (request: Request) => {
   try {
     const token = cookies().get("token");
+    console.log("here")
+    if(token===undefined){
+      console.log("undefined")
+      return NextResponse.json({ message: "Not Present", status: 400 });
+    }
     const claims = jose.decodeJwt(token.value);
     const signupWithexpenditure = await prisma.signup.findMany({
       where: {
@@ -15,7 +20,7 @@ export const GET = async (request: Request) => {
         expenditure: true,
       },
     });
-    return NextResponse.json(signupWithexpenditure);
+    return NextResponse.json({message:signupWithexpenditure,status:200});
   } catch (error) {
     return NextResponse.json({ message: "error", status: 500 });
   }

@@ -2,6 +2,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Box, Card, CardBody, CardHeader, Text } from "@chakra-ui/react";
+import Simple from "../../components/Navbar";
 
 const GetBlog = () => {
   
@@ -30,6 +31,7 @@ const GetBlog = () => {
   }, []);
   return (
     <Suspense>
+      <Simple/>
       <Card p={"4"}>
         <CardHeader fontWeight={"bold"}>{data.title}</CardHeader>
         <CardBody>

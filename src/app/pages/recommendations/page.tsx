@@ -10,10 +10,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { InfiniteMovingCards } from "../../components/InfiniteMovingCards";
 import Head from "next/head";
+import Simple from "../../components/Navbar";
 
 const Recommendations = () => {
   const [data, setData] = useState<{ any: any }[]>([]);
-
 
   useEffect(() => {
     const getRecommendations = async () => {
@@ -36,13 +36,18 @@ const Recommendations = () => {
   }, [data]);
 
   return (
-    <Card>
-      <CardHeader><Heading>Recommendations</Heading></CardHeader>
-      <CardBody><InfiniteMovingCards items={data}/></CardBody>
-    
-    </Card>
+    <>
+      <Simple />
+      <Card>
+        <CardHeader>
+          <Heading>Recommendations</Heading>
+        </CardHeader>
+        <CardBody>
+          <InfiniteMovingCards items={data} />
+        </CardBody>
+      </Card>
+    </>
   );
 };
 
 export default Recommendations;
-
