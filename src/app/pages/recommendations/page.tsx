@@ -40,7 +40,7 @@ const Recommendations = () => {
           }
         }
         console.log(cleanString.substring(first, last + 1));
-        const array = JSON.parse(cleanString.substr(first, last + 1));
+        const array = JSON.parse(cleanString.substring(first, last + 1));
         setData(array);
       } catch (error) {
         console.log(error);
@@ -94,7 +94,7 @@ const Recommendations = () => {
                         last = i;
                       }
                     }
-                    console.log(cleanString.substr(first, last + 1));
+                    console.log(cleanString.substring(first, last + 1));
                     const array = JSON.parse(
                       cleanString.substring(first, last + 1)
                     );
