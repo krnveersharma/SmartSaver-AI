@@ -5,19 +5,21 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Flex,
   FormLabel,
   Heading,
+  List,
+  ListItem,
   Text,
   Textarea,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { InfiniteMovingCards } from "../../components/InfiniteMovingCards";
-import Head from "next/head";
+import { SendHorizontal } from "lucide-react";
 import Simple from "../../components/Navbar";
 
 const Recommendations = () => {
   const [data, setData] = useState<{ any: any }[]>([]);
-  const [inp,setInp]=useState("");
+  const [inp, setInp] = useState("");
 
   useEffect(() => {
     const getRecommendations = async () => {
@@ -36,12 +38,28 @@ const Recommendations = () => {
     getRecommendations();
   }, []);
 
-
   return (
     <>
       <Simple />
-      <Card>
-        <CardHeader>
+      <Card height={"100%"}>
+        <Heading>Recommendations</Heading>
+        <Text fontSize={"sm"} fontStyle={"italic"}>
+          (Based on last 6 days)
+        </Text>
+        <CardBody >
+          {data.map((item, idx) =>
+            Object.entries(item).map(([key, value]) => (
+              <List key={`${idx}-${key}`}>
+                <ListItem>
+                  <Text fontWeight={"bold"}>{key}</Text>
+                  <Text> {value}</Text>
+                </ListItem>
+                <br />
+                <br />
+              </List>
+            ))
+          )}
+          <Box position={"sticky"} bottom={0} className=" bg-slate-100 z-10">
           <form onSubmit={(e)=>{
             e.preventDefault();
             const getRecommendations = async () => {
@@ -65,16 +83,29 @@ const Recommendations = () => {
             getRecommendations();
             setInp("");
           }}>
-            <Textarea value={inp} onChange={(e)=>{
-              setInp(e.target.value)
-            }}/>
-            <FormLabel>Enter chnages you want to make to recommendation!!!</FormLabel>
-            <Button type="submit" colorScheme={'blue'}>Submit</Button>
-          </form>
-          <Heading>Recommendations</Heading>
-        </CardHeader>
-        <CardBody>
-          <InfiniteMovingCards items={data} />
+              <Flex
+                alignItems={"center"}
+                className={"border border-gray-200 rounded-md"}
+              >
+                <Textarea
+                  resize={"none"}
+                  _focusVisible={{
+                    outline: "none",
+                  }}
+                  border={"0px"}
+                  value={inp}
+                  onChange={(e) => {
+                    setInp(e.target.value);
+                  }}
+                  placeholder="Enter doubts to get customized recommendation!!"
+                />
+
+                <Button type="submit" background={"white"}>
+                  <SendHorizontal />
+                </Button>
+              </Flex>
+            </form>
+          </Box>
         </CardBody>
       </Card>
     </>
