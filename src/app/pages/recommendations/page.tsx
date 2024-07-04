@@ -51,7 +51,6 @@ const Recommendations = () => {
 
   return (
     <>
-      <Simple />
       <Card height={"100%"}>
         <Heading>Recommendations</Heading>
         <Text fontSize={"sm"} fontStyle={"italic"}>

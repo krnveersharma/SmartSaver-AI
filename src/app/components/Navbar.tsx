@@ -49,23 +49,22 @@ const NavLink = (props: Props) => {
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isPresent, setIsPresent] = useState(false);
-  useEffect(()=>{
+  useEffect(() => {
     console.log(isPresent);
-  },[isPresent])
+  }, [isPresent]);
   useEffect(() => {
     const userData = async () => {
       try {
         const response = await fetch("/api/getUser", {
           method: "GET",
         });
-        const parsedData=await response.json();
-        console.log("parsed",parsedData.status)
-        if (parsedData.status===200) {
-          console.log("here")
+        const parsedData = await response.json();
+        console.log("parsed", parsedData.status);
+        if (parsedData.status === 200) {
+          console.log("here");
           setIsPresent(true);
-        }
-        else{
-          setIsPresent(false)
+        } else {
+          setIsPresent(false);
         }
       } catch (error) {
         console.log(error);
@@ -100,11 +99,17 @@ export default function Simple() {
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack  spacing={8} alignItems={"center"}>
-            <svg width="100" height="64"  xmlns="http://www.w3.org/2000/svg">
-              <rect rx="100%"  width="100%" height="100%" fill="white" />
+          <HStack spacing={8} alignItems={"center"}>
+            <svg width="100" height="64" xmlns="http://www.w3.org/2000/svg">
+              <rect rx="100%" width="100%" height="100%" fill="white" />
 
-              <text x="10" y="35" font-family="Arial" font-size="20" fill="black">
+              <text
+                x="10"
+                y="35"
+                font-family="Arial"
+                font-size="20"
+                fill="black"
+              >
                 $
               </text>
 
@@ -119,10 +124,10 @@ export default function Simple() {
                   M
                 </tspan>
                 oney
-                <tspan fontStyle={'italic'} x="25" dy="1.2em" font-size="15">
+                <tspan fontStyle={"italic"} x="25" dy="1.2em" font-size="15">
                   M
                 </tspan>
-                <tspan fontStyle={'italic'}>anager</tspan>
+                <tspan fontStyle={"italic"}>anager</tspan>
               </text>
             </svg>
 
@@ -141,6 +146,7 @@ export default function Simple() {
                 All Blogs
               </Link>
               <Link href="/pages/recommendations">Recommendations</Link>
+              <Link href="/pages/ExpenditureControl">ExpenditureControl</Link>
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -180,6 +186,7 @@ export default function Simple() {
                 All Blogs
               </Link>
               <Link href="/pages/recommendations">Recommendations</Link>
+              <Link href="/pages/ExpenditureControl">ExpenditureControl</Link>
             </Stack>
           </Box>
         ) : null}

@@ -41,7 +41,6 @@ const AddBlog = () => {
   };
   return (
     <>
-      <Simple />
       <Card>
         <CardHeader>
           <Heading>Add Your Blog!!!</Heading>

@@ -50,7 +50,6 @@ const Login = () => {
     },[])
   return (
     <form onSubmit={handleSubmit}>
-      <Simple />
       <Card align="center">
         <CardHeader>
           <Heading>Login</Heading>

@@ -31,7 +31,6 @@ const GetBlog = () => {
   }, []);
   return (
     <Suspense>
-      <Simple/>
       <Card p={"4"}>
         <CardHeader fontWeight={"bold"}>{data.title}</CardHeader>
         <CardBody>

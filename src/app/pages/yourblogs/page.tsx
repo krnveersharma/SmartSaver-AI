@@ -26,7 +26,6 @@ const YourBlogs = () => {
     },[])
   return (
     <Box>
-        <Simple/>
     <TableContainer>
         <Table variant={'simple'}>
             <Thead>

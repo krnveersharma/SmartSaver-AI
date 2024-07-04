@@ -53,8 +53,8 @@ const Register = () => {
         const response = await fetch("/api/getUser", {
           method: "GET",
         });
-        console.log(response)
-        if (response.ok) {
+        const data=await response.json()
+        if (data.status===200) {
           router.push('/pages/home')
         }
     }

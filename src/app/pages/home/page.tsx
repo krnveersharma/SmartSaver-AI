@@ -67,7 +67,6 @@ const Home = () => {
 
   return (
     <Box>
-      <Simple/>
       <Box>
       </Box>
       <Box p={4}>
