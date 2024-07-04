@@ -31,6 +31,7 @@ model Signup{
   expenditure Expenditure[]
   blog Blog[]
   recommendation Recommendation?
+  savemoney SaveMoney?
 }
 
 model Expenditure{
@@ -55,6 +56,14 @@ model Recommendation{
   id String @id @default(cuid())
   data String
   created_at DateTime
+  userId String @unique
+  signup Signup @relation(fields:[userId],references:[id])
+}
+
+model SaveMoney{
+  id String @id @default(cuid())
+  saving Int
+  data String 
   userId String @unique
   signup Signup @relation(fields:[userId],references:[id])
 }

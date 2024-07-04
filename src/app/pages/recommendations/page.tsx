@@ -29,19 +29,19 @@ const Recommendations = () => {
       const data = await response.json();
       try {
         const cleanString = data.message.trim();
-        let first=-1;
-                let last=-1;
-                for(let i=0;i<cleanString.length;i++){
-                  if(cleanString[i]=='['){
-                    first=i;
-                  }
-                  if(cleanString[i]==']'){
-                    last=i;
-                  }
-                }
-                console.log(cleanString.substr(first,last+1));
-                const array = JSON.parse(cleanString.substr(first,last+1));
-                setData(array)
+        let first = -1;
+        let last = -1;
+        for (let i = 0; i < cleanString.length; i++) {
+          if (cleanString[i] == "[") {
+            first = i;
+          }
+          if (cleanString[i] == "]") {
+            last = i;
+          }
+        }
+        console.log(cleanString.substring(first, last + 1));
+        const array = JSON.parse(cleanString.substr(first, last + 1));
+        setData(array);
       } catch (error) {
         console.log(error);
       }
@@ -56,7 +56,7 @@ const Recommendations = () => {
         <Text fontSize={"sm"} fontStyle={"italic"}>
           (Based on last 6 days)
         </Text>
-        <CardBody >
+        <CardBody>
           {data.map((item, idx) =>
             Object.entries(item).map(([key, value]) => (
               <List key={`${idx}-${key}`}>
@@ -70,41 +70,45 @@ const Recommendations = () => {
             ))
           )}
           <Box position={"sticky"} bottom={0} className=" bg-slate-100 z-10">
-          <form onSubmit={(e)=>{
-            e.preventDefault();
-            const getRecommendations = async () => {
-              const response = await fetch("/api/recommendations", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(inp),
-              });
-              const data = await response.json();
-              try {
-                const cleanString = data.message.trim();
-                let first=-1;
-                let last=-1;
-                for(let i=0;i<cleanString.length;i++){
-                  if(cleanString[i]=='['){
-                    first=i;
-                  }
-                  if(cleanString[i]==']'){
-                    last=i;
-                  }
-                }
-                console.log(cleanString.substr(first,last+1));
-                const array = JSON.parse(cleanString.substr(first,last+1));
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const getRecommendations = async () => {
+                  const response = await fetch("/api/recommendations", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(inp),
+                  });
+                  const data = await response.json();
+                  try {
+                    const cleanString = data.message.trim();
+                    let first = -1;
+                    let last = -1;
+                    for (let i = 0; i < cleanString.length; i++) {
+                      if (cleanString[i] == "[") {
+                        first = i;
+                      }
+                      if (cleanString[i] == "]") {
+                        last = i;
+                      }
+                    }
+                    console.log(cleanString.substr(first, last + 1));
+                    const array = JSON.parse(
+                      cleanString.substring(first, last + 1)
+                    );
 
-                console.log("yourdata",array)
-                setData(array);
-              } catch (error) {
-                console.log(error);
-              }
-            };
-            getRecommendations();
-            setInp("");
-          }}>
+                    console.log("yourdata", array);
+                    setData(array);
+                  } catch (error) {
+                    console.log(error);
+                  }
+                };
+                getRecommendations();
+                setInp("");
+              }}
+            >
               <Flex
                 alignItems={"center"}
                 className={"border border-gray-200 rounded-md"}
