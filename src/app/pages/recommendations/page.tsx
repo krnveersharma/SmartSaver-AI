@@ -29,8 +29,19 @@ const Recommendations = () => {
       const data = await response.json();
       try {
         const cleanString = data.message.trim();
-        const array = JSON.parse(cleanString);
-        setData(array);
+        let first=-1;
+                let last=-1;
+                for(let i=0;i<cleanString.length;i++){
+                  if(cleanString[i]=='['){
+                    first=i;
+                  }
+                  if(cleanString[i]==']'){
+                    last=i;
+                  }
+                }
+                console.log(cleanString.substr(first,last+1));
+                const array = JSON.parse(cleanString.substr(first,last+1));
+                setData(array)
       } catch (error) {
         console.log(error);
       }
@@ -73,7 +84,19 @@ const Recommendations = () => {
               const data = await response.json();
               try {
                 const cleanString = data.message.trim();
-                const array = JSON.parse(cleanString);
+                let first=-1;
+                let last=-1;
+                for(let i=0;i<cleanString.length;i++){
+                  if(cleanString[i]=='['){
+                    first=i;
+                  }
+                  if(cleanString[i]==']'){
+                    last=i;
+                  }
+                }
+                console.log(cleanString.substr(first,last+1));
+                const array = JSON.parse(cleanString.substr(first,last+1));
+
                 console.log("yourdata",array)
                 setData(array);
               } catch (error) {
@@ -100,7 +123,7 @@ const Recommendations = () => {
                   placeholder="Enter doubts to get customized recommendation!!"
                 />
 
-                <Button type="submit" background={"white"}>
+                <Button type="submit" className="bg-slate-100">
                   <SendHorizontal />
                 </Button>
               </Flex>

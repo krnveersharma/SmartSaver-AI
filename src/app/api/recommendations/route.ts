@@ -73,7 +73,7 @@ export const GET = async (request: Request) => {
         const formattedData = formatExpenditureData(userData);
         const prompt = `Analyze the data and Provide money-saving recommendations. You can give examples too:\n\n${formattedData}`;
         const chatCompletion = await getGroqChatCompletion(
-          prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}]. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"
+          prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}].Give detailed suggestion. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"
         );
         try {
           const data={
@@ -171,7 +171,7 @@ export const POST = async (request: Request) => {
         const formattedData = formatExpenditureData(userData);
         const prompt = `Analyze the data and Provide money-saving recommendations. You can give examples too:\n\n${formattedData}`;
         const chatCompletion = await getGroqChatCompletion(
-          prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}]. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"+body
+          prompt + "All price is in INR.Give answer only in json format as [{item:suggestion}].Give detailed suggestion. Dot give points or any other format and dont write anything else other than [{item:suggestion}]"+body
         );
         try {
           const data={
