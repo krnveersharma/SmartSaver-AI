@@ -85,13 +85,21 @@ export const POST = async (request: Request) => {
       }
     }
     cleanString = cleanString.substring(first, last + 1);
+    const previousData = await prisma.savemoney.findMany({
+      where: {
+        userId: claims.id,
+      },
+    });
     if (cleanString.length != 0) {
       try {
-        await prisma.savemoney.delete({
-          where: {
-            userId: claims.id,
-          },
-        });
+        if (previousData.length == 1) {
+          await prisma.savemoney.delete({
+            where: {
+              userId: claims.id,
+            },
+          });
+        }
+
         const response = await prisma.savemoney.create({
           data: {
             saving: parseInt(body),
@@ -99,6 +107,7 @@ export const POST = async (request: Request) => {
             userId: claims.id,
           },
         });
+        console.log(response)
       } catch (error) {
         console.log(error);
       }

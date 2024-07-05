@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import Simple from '../components/Navbar';
-
+import '../globals.css'
 
 type Props = {
   children?: ReactNode;

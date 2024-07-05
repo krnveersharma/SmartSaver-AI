@@ -46,10 +46,10 @@ const ExpenditureControl = () => {
         if (parsedData.status === 200) {
           setData(parsedData.message[0]);
         }
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false)
+        setLoading(false);
       }
     };
     userData();
@@ -142,42 +142,43 @@ const ExpenditureControl = () => {
                   body: JSON.stringify(saving),
                 });
                 const data = await response.json();
-                console.log(data);
-                const newdata = JSON.parse(data.data);
+                if (data.data.length > 4) {
+                  const newdata = JSON.parse(data.data);
 
-                // Transforming the data
-                const labels = [];
-                const values = [];
+                  // Transforming the data
+                  const labels = [];
+                  const values = [];
 
-                newdata.forEach((item) => {
-                  const key = Object.keys(item)[0];
-                  const value = item[key];
-                  labels.push(key);
-                  values.push(value);
-                });
+                  newdata.forEach((item) => {
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
+                    labels.push(key);
+                    values.push(value);
+                  });
 
-                setPieData({
-                  labels,
-                  datasets: [
-                    {
-                      data: values,
-                      backgroundColor: [
-                        "rgba(255, 99, 132, 0.6)",
-                        "rgba(54, 162, 235, 0.6)",
-                        "rgba(255, 206, 86, 0.6)",
-                        "rgba(75, 192, 192, 0.6)",
-                        "rgba(153, 102, 255, 0.6)",
-                        "rgba(255, 159, 64, 0.6)",
-                        "rgba(99, 255, 132, 0.6)",
-                        "rgba(235, 54, 162, 0.6)",
-                      ],
-                    },
-                  ],
-                });
+                  setPieData({
+                    labels,
+                    datasets: [
+                      {
+                        data: values,
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.6)",
+                          "rgba(54, 162, 235, 0.6)",
+                          "rgba(255, 206, 86, 0.6)",
+                          "rgba(75, 192, 192, 0.6)",
+                          "rgba(153, 102, 255, 0.6)",
+                          "rgba(255, 159, 64, 0.6)",
+                          "rgba(99, 255, 132, 0.6)",
+                          "rgba(235, 54, 162, 0.6)",
+                        ],
+                      },
+                    ],
+                  });
+                }
                 setLoading(false);
               } catch (error) {
                 console.log(error);
-                setLoading(false)
+                setLoading(false);
               }
             };
             SubmitForm();
@@ -188,7 +189,7 @@ const ExpenditureControl = () => {
         </Button>
         <br />
       </Flex>
-      <Box maxH={'400px'} className="flex justify-center">
+      <Box maxH={"400px"} className="flex justify-center">
         <Pie data={pieData} />
       </Box>
     </Box>
