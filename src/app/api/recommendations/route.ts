@@ -5,7 +5,7 @@ import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
 });
 
 export const GET = async (request: Request) => {
