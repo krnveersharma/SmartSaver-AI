@@ -49,9 +49,7 @@ const NavLink = (props: Props) => {
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isPresent, setIsPresent] = useState(false);
-  useEffect(() => {
-    console.log(isPresent);
-  }, [isPresent]);
+  const [url, setUrl] = useState("/pages/home");
   useEffect(() => {
     const userData = async () => {
       try {
@@ -59,9 +57,7 @@ export default function Simple() {
           method: "GET",
         });
         const parsedData = await response.json();
-        console.log("parsed", parsedData.status);
         if (parsedData.status === 200) {
-          console.log("here");
           setIsPresent(true);
         } else {
           setIsPresent(false);
@@ -78,8 +74,6 @@ export default function Simple() {
         method: "GET",
       });
       if (response.ok) {
-        console.log("Logout successful");
-
         window.location.reload();
       } else {
         console.error("Logout failed:", response.statusText);
@@ -90,7 +84,7 @@ export default function Simple() {
   };
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box backgroundColor={"#36454F"} textColor={"white"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -135,18 +129,82 @@ export default function Simple() {
               as={"nav"}
               spacing={4}
               display={{ base: "none", md: "flex" }}
+              h={16}
             >
-              <Link href="/pages/home" key={"home"}>
-                Home
+              <Link
+                href="/pages/home"
+                key={"home"}
+                onClick={() => setUrl("/pages/home")}
+              >
+                <Box
+                  className={
+                    url === "/pages/home"
+                      ? " border-b-2 border-b-white-500"
+                      : "flex items-center justify-center"
+                  }
+                >
+                  Home
+                </Box>
               </Link>
-              <Link href="/pages/yourblogs" key={"home"}>
-                Your Blogs
+              <Link
+                href="/pages/yourblogs"
+                key={"home"}
+                onClick={() => setUrl("/pages/yourblogs")}
+              >
+                <Box
+                  className={
+                    url === "/pages/yourblogs"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  Your Blogs
+                </Box>
               </Link>
-              <Link href="/pages/allblogs" key={"allblogs"}>
-                All Blogs
+
+              <Link
+                href="/pages/allblogs"
+                key={"allblogs"}
+                onClick={() => setUrl("/pages/allblogs")}
+              >
+                <Box
+                  className={
+                    url === "/pages/allblogs"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  All Blogs
+                </Box>
               </Link>
-              <Link href="/pages/recommendations">Recommendations</Link>
-              <Link href="/pages/ExpenditureControl">ExpenditureControl</Link>
+              <Link
+                href="/pages/recommendations"
+                onClick={() => setUrl("/pages/recommendations")}
+              >
+                <Box
+                  className={
+                    url === "/pages/recommendations"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  Recommendations
+                </Box>
+              </Link>
+              <Link
+                href="/pages/ExpenditureControl"
+                onClick={() => setUrl("/pages/ExpenditureControl")}
+              >
+                <Box
+                  className={
+                    url === "/pages/ExpenditureControl"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  ExpenditureControl
+                </Box>
+              </Link>
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -176,17 +234,85 @@ export default function Simple() {
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Link href="/pages/home" key={"home"}>
-                Home
+              <Link
+                href="/pages/home"
+                key={"home"}
+                onClick={() => setUrl("/pages/home")}
+              >
+                <Box
+                  width={"max-content"}
+                  className={
+                    url === "/pages/home"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  Home
+                </Box>
               </Link>
-              <Link href="/pages/yourblogs" key={"yourblogs"}>
-                Your Blogs
+              <Link
+                href="/pages/yourblogs"
+                key={"home"}
+                onClick={() => setUrl("/pages/yourblogs")}
+              >
+                <Box
+                  width={"max-content"}
+                  className={
+                    url === "/pages/yourblogs"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  Your Blogs
+                </Box>
               </Link>
-              <Link href="/pages/allblogs" key={"allblogs"}>
-                All Blogs
+
+              <Link
+                href="/pages/allblogs"
+                key={"allblogs"}
+                onClick={() => setUrl("/pages/allblogs")}
+              >
+                <Box
+                  width={"max-content"}
+                  className={
+                    url === "/pages/allblogs"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  All Blogs
+                </Box>
               </Link>
-              <Link href="/pages/recommendations">Recommendations</Link>
-              <Link href="/pages/ExpenditureControl">ExpenditureControl</Link>
+              <Link
+                href="/pages/recommendations"
+                onClick={() => setUrl("/pages/recommendations")}
+              >
+                <Box
+                  width={"max-content"}
+                  className={
+                    url === "/pages/recommendations"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  Recommendations
+                </Box>
+              </Link>
+              <Link
+                href="/pages/ExpenditureControl"
+                onClick={() => setUrl("/pages/ExpenditureControl")}
+              >
+                <Box
+                  width={"max-content"}
+                  className={
+                    url === "/pages/ExpenditureControl"
+                      ? " border-b-2 border-b-white-500"
+                      : ""
+                  }
+                >
+                  ExpenditureControl
+                </Box>
+              </Link>
             </Stack>
           </Box>
         ) : null}

@@ -15,11 +15,23 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { SendHorizontal } from "lucide-react";
-import Simple from "../../components/Navbar";
-
+import { MultiStepLoader as Loader } from "../../components/ui/multi-step-loader";
 const Recommendations = () => {
   const [data, setData] = useState<{ any: any }[]>([]);
   const [inp, setInp] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const loadingStates = [
+    {
+      text: "Fetching your last 6 days expenditure",
+    },
+    {
+      text: "Generating your recommendations",
+    },
+    {
+      text: "Please wait",
+    },
+  ];
 
   useEffect(() => {
     const getRecommendations = async () => {
@@ -39,11 +51,13 @@ const Recommendations = () => {
             last = i;
           }
         }
-        console.log(cleanString.substring(first, last + 1));
+
         const array = JSON.parse(cleanString.substring(first, last + 1));
         setData(array);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
     getRecommendations();
@@ -51,6 +65,7 @@ const Recommendations = () => {
 
   return (
     <>
+    <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
       <Card height={"100%"}>
         <Heading>Recommendations</Heading>
         <Text fontSize={"sm"} fontStyle={"italic"}>
@@ -73,6 +88,7 @@ const Recommendations = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                setLoading(true);
                 const getRecommendations = async () => {
                   const response = await fetch("/api/recommendations", {
                     method: "POST",
@@ -94,19 +110,21 @@ const Recommendations = () => {
                         last = i;
                       }
                     }
-                    console.log(cleanString.substring(first, last + 1));
+
                     const array = JSON.parse(
                       cleanString.substring(first, last + 1)
                     );
 
-                    console.log("yourdata", array);
                     setData(array);
+                    setLoading(false);
                   } catch (error) {
                     console.log(error);
+                    setLoading(false);
                   }
                 };
                 getRecommendations();
                 setInp("");
+
               }}
             >
               <Flex

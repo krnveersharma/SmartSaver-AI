@@ -31,7 +31,7 @@ model Signup{
   expenditure Expenditure[]
   blog Blog[]
   recommendation Recommendation?
-  savemoney SaveMoney?
+  savemoney Savemoney?
 }
 
 model Expenditure{
@@ -60,7 +60,7 @@ model Recommendation{
   signup Signup @relation(fields:[userId],references:[id])
 }
 
-model SaveMoney{
+model Savemoney{
   id String @id @default(cuid())
   saving Int
   data String 

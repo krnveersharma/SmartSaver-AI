@@ -33,7 +33,6 @@ const YourBlogs = () => {
         method: "GET",
       });
       const allBlogs = await response.json();
-      console.log(allBlogs);
       setData(allBlogs.data);
     };
     getBlogs();
