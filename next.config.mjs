@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    
     async headers() {
         return [
             {
@@ -13,7 +14,12 @@ const nextConfig = {
                 ]
             }
         ]
-    }
+    },
+    env:{
+        DATABASE_URL:process.env.DATABASE_URL,
+        DIRECT_URL:process.env.DIRECT_URL,
+        GROQ_API_KEY:process.env.GROQ_API_KEY
+    },
 }
 
 export default nextConfig;
