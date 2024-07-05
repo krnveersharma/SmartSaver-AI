@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "../../../../../lib/prisma";
 import { cookies } from "next/headers";
 import * as jose from "jose";
+import * as bcrypt from 'bcrypt'
 export const POST = async (request: Request) => {
   const secret = "Hello guys";
   const token = cookies().get("token");
@@ -21,7 +22,7 @@ export const POST = async (request: Request) => {
     },
   });
   if (user) {
-    if (user.password === password) {
+    if (bcrypt.compare(user.password,password)) {
       const alg = "HS256";
       const jwt = await new jose.SignJWT(user)
         .setProtectedHeader({ alg, typ: "JWT" })

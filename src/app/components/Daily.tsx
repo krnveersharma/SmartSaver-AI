@@ -146,8 +146,8 @@ const Daily = () => {
     userData();
   }, []);
   return (
-    <Box>
-      <Line options={options} data={chartData} />
+    <Box  >
+      <Line  options={options} data={chartData} />
     </Box>
   );
 };

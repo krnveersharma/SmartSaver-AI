@@ -5,7 +5,6 @@ import AddSpendingModal from "../../components/AddSpendingModal";
 import AllTime from "../../components/AllTime";
 import Daily from "../../components/Daily";
 import Monthly from "../../components/Monthly";
-import Simple from "../../components/Navbar";
 
 type Expenditure = {
   id: string;
@@ -75,6 +74,7 @@ const Home = () => {
           Spendings till now
         </Text>
         <AddSpendingModal/>
+        <br/><br/>
         <Select
           width={'max-content'}
           onChange={(e) => {
@@ -92,8 +92,9 @@ const Home = () => {
           <option value="1">Daily</option>
           <option value="2">Monthly</option>
         </Select>
-        <Box>{option}</Box>
+        
       </Box>
+      {option}
     </Box>
   );
 };

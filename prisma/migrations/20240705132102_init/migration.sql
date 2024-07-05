@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Signup" ALTER COLUMN "Income" SET DATA TYPE TEXT;

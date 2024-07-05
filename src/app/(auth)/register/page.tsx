@@ -5,6 +5,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -38,8 +39,9 @@ const Register = () => {
           },
           body:JSON.stringify(data)
         });
-        if(response.ok){
-          redirect('/login')
+        const dt=await response.json();
+        if(dt.status===200){
+          window.location.assign('/')
         }
         else{
           console.log("Error");
@@ -61,10 +63,11 @@ const Register = () => {
     getting();
     },[])
   return (
+    <Flex height={'100vh'}  alignItems={'center'} justifyContent={'center'}>
     <form onSubmit={handleSubmit}>
-      <Card align='center'>
+      <Card align='center' border={'none'} shadow={'none'}>
         <CardHeader>
-          <Heading>Register</Heading>
+          <Heading>Welcome!</Heading>
         </CardHeader>
         <CardBody>
           <FormControl>
@@ -114,11 +117,12 @@ const Register = () => {
           </FormControl>
           <Box width={'inherit'}>
               <span><Text fontSize={'sm'}>Already have an account?</Text></span>
-        <span><Link href="/"><Text align={'left'} fontSize={'sm'}>Login</Text></Link></span></Box>
+        <span><Link href="/"><Text align={'left'} fontSize={'sm'}className=" text-blue-500">Login</Text></Link></span></Box>
         </CardBody>
-        <Button type="submit" colorScheme={'green'}>Submit</Button>
+        <Button type="submit" backgroundColor={'black'}  color={'white'} >Signup</Button>
       </Card>
     </form>
+    </Flex>
   );
 };
 

@@ -1,22 +1,24 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../../lib/prisma";
+import * as bcrypt from 'bcrypt'
 export const POST =async (request:Request)=>{
     try {
         const body = await request.json();
-
+        const saltRounds=10;
         const { username, email, phone, password,income } = body;
         
         try {
+            const hashedPassword=await bcrypt.hash(password,saltRounds);
             const newSignup=await prisma.signup.create({
                 data:{
                     username:username,
                     email:email,
                     phone:phone,
-                    password:password,
-                    Income:parseInt(income)
+                    password:hashedPassword,
+                    Income:income
                 }
             })
-            return NextResponse.json({message:newSignup},{status:200});
+            return NextResponse.json({message:newSignup,status:200});
         } catch (error) {
             console.log(error);
         }

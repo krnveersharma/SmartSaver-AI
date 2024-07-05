@@ -114,8 +114,8 @@ const AllTime = () => {
     userData();
   }, []);
   return (
-    <Box>
-      <Line options={options} data={chartData}/>
+    <Box minH={'400px'} width={'100vw'}>
+      <Line height={'full'}  options={options} data={chartData}/>
     </Box>
   )
 };

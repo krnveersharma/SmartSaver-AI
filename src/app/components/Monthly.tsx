@@ -146,7 +146,7 @@ const Monthly = () => {
     userData();
   }, []);
   return (
-    <Box>
+    <Box >
       <Line options={options} data={chartData} />
     </Box>
   );

@@ -10,10 +10,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = "postgres://avnadmin:AVNS_frWDKCMEf-87s3b5pkQ@pg-3e17850e-moneymanager.j.aivencloud.com:20260/defaultdb?sslmode=require"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
-
 
 model Login{
   username String  @unique
@@ -27,7 +27,7 @@ model Signup{
   email String
   phone String
   password String 
-  Income Int
+  Income String
   expenditure Expenditure[]
   blog Blog[]
   recommendation Recommendation?

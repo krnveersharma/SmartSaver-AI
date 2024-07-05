@@ -188,7 +188,7 @@ const ExpenditureControl = () => {
         </Button>
         <br />
       </Flex>
-      <Box>
+      <Box maxH={'400px'} className="flex justify-center">
         <Pie data={pieData} />
       </Box>
     </Box>

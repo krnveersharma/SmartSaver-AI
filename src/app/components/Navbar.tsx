@@ -87,6 +87,7 @@ export default function Simple() {
       <Box backgroundColor={"#36454F"} textColor={"white"} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
+          backgroundColor={'white'}
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
@@ -212,6 +213,7 @@ export default function Simple() {
               {isPresent && (
                 <Box>
                   <MenuButton
+                  color={'white'}
                     as={Button}
                     rounded={"full"}
                     variant={"link"}

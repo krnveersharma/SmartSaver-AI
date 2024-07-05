@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Card, CardBody, CardHeader, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardHeader, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useState } from "react";
@@ -56,7 +56,6 @@ const Login = () => {
             method: "GET",
           });
           const data=await response.json();
-          console.log(data)
           if (data.status===200) {
             router.push('/pages/home');
           }
@@ -70,11 +69,12 @@ const Login = () => {
 
     },[])
   return (
+    <Flex height={'100vh'}  alignItems={'center'} justifyContent={'center'}>
     <form onSubmit={handleSubmit}>
        <Loader loadingStates={loadingStates} loading={loading} duration={2000} />
-      <Card align="center">
+      <Card align="center" border={'none'} shadow={'none'}>
         <CardHeader>
-          <Heading>Login</Heading>
+          <Heading>Welcome!</Heading>
         </CardHeader>
         <CardBody>
             <FormControl>
@@ -97,12 +97,13 @@ const Login = () => {
             </FormControl>    
             <Box width={'inherit'}>
               <span><Text fontSize={'sm'}>Not have an account?</Text></span>
-        <span><Link href="/register"><Text align={'left'} fontSize={'sm'}>Create account</Text></Link></span></Box>
+        <span><Link href="/register"><Text align={'left'} fontSize={'sm'} className=" text-blue-500">Create account</Text></Link></span></Box>
         </CardBody>
         
-        <Button type="submit" colorScheme={'green'}>Submit</Button>
+        <Button type="submit" backgroundColor={'black'}  color={'white'} >Login</Button>
       </Card>
     </form>
+    </Flex>
   );
 };
 
