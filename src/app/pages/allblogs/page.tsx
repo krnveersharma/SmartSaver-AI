@@ -38,7 +38,7 @@ const YourBlogs = () => {
     getBlogs();
   }, []);
   return (
-    <Box>
+    <Box className="px-2">
       <TableContainer>
         <Table variant={"simple"}>
           <Thead>

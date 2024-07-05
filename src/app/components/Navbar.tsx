@@ -203,7 +203,7 @@ export default function Simple() {
                       : ""
                   }
                 >
-                  ExpenditureControl
+                  Expense Control
                 </Box>
               </Link>
             </HStack>
@@ -312,7 +312,7 @@ export default function Simple() {
                       : ""
                   }
                 >
-                  ExpenditureControl
+                  Expense Control
                 </Box>
               </Link>
             </Stack>

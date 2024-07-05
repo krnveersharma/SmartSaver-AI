@@ -1,5 +1,5 @@
 {
-  "name": "moneymanager",
+  "name": "smartsaverai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,11 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krnveersharma/MoneyManager.git"
+  },
+  "author":"Karanveer Sharma karanveer1029y@gmail.com",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/next-js": "^2.2.0",
