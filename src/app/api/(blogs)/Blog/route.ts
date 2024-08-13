@@ -27,14 +27,16 @@ export const POST = async (request: Request) => {
   };
 
   try {
+    console.log("Inside db")
     const created=await prisma.blog.create({ data:data });
     console.log("crearteion:" ,created)
     // Update the cache with the new list of blogs
     const allBlogs = await prisma.blog.findMany();
-    await redisClient.set('blogs', JSON.stringify(allBlogs), { EX: 3600 }); // Set TTL to 1 hour
+    await redisClient.set('blogs', JSON.stringify(allBlogs), { EX: 86400 }); // Set TTL to 1 DAY
 
     return NextResponse.json({ message: 'success', status: 200 });
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ message: error.message, status: 400 });
   }
 };

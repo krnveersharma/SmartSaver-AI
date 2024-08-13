@@ -1,13 +1,14 @@
+import path from "path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
     return [
       {
-        // matching all API routes
         source: "/api/:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
-          { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+          { key: "Access-Control-Allow-Origin", value: "*" }, // Replace this with your actual origin
           {
             key: "Access-Control-Allow-Methods",
             value: "GET,DELETE,PATCH,POST,PUT",
@@ -28,10 +29,7 @@ const nextConfig = {
     REDIS_URL: process.env.REDIS_URL,
     REDIS_PASSWORD: process.env.REDIS_PASSWORD,
   },
-  cacheHandler:
-    process.env.NODE_ENV === "production"
-      ? require.resolve("./cache-handler.cjs")
-      : undefined,
+  cacheHandler: path.resolve("./cache-handler.js"),
 };
 
 export default nextConfig;

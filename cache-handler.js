@@ -1,4 +1,4 @@
-const createClient = require("redis").createClient;
+const { createClient } = require("redis");
 const CacheHandler = require("@neshca/cache-handler").CacheHandler;
 const createLruCache = require("@neshca/cache-handler/local-lru").default;
 const createRedisCache = require("@neshca/cache-handler/redis-strings").default;
@@ -35,7 +35,7 @@ CacheHandler.onCreation(async () => {
       console.log("Connected to Redis");
       redisCache = createRedisCache({
         client,
-        keyPrefix: `next-shared-cache-${process.env.NEXT_PUBLIC_BUILD_NUMBER}:`,
+        keyPrefix: `next-shared-cache-1:`,
         timeoutMs: 5000,
       });
     } catch (error) {
