@@ -8,14 +8,10 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Text,
   Textarea,
-  useStatStyles,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import Simple from "../../components/Navbar";
+import React, { useEffect, useState } from "react";
 
 const EditBlog = () => {
   const router = useRouter();
@@ -30,16 +26,18 @@ const EditBlog = () => {
   useEffect(() => {
     let params = new URLSearchParams(document.location.search);
     const id = params.get("id");
+
     const getBlog = async () => {
       const response = await fetch("/api/editblog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(id),
+        body: JSON.stringify({id}),
       });
       const dt = await response.json();
-      setData(dt.data[0]);
+    
+      setData(dt.data);
     };
     getBlog();
   }, []);

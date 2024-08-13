@@ -39,6 +39,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "react-router-dom": "^6.23.1",
+    "redis": "^4.7.0",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
